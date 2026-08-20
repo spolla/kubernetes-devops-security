@@ -83,6 +83,13 @@
 					<targetTests>
 						<param>com.devsecops.*</param>
 					</targetTests>
+					<!-- XML is required by the Jenkins Pitmutation plugin; HTML for humans.
+					     Non-timestamped so the report path is stable for Jenkins. -->
+					<outputFormats>
+						<param>XML</param>
+						<param>HTML</param>
+					</outputFormats>
+					<timestampedReports>false</timestampedReports>
 				</configuration>
 				<executions>
 					<execution>
