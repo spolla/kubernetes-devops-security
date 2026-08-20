@@ -69,6 +69,32 @@
 				</executions>
 			</plugin>
 
+			<!-- PITest: mutation testing. Seeds faults ("mutants") into the code and
+			     checks whether the tests catch them (mutationCoverage). Report at
+			     target/pit-reports/. Runs in the test phase, after JaCoCo. -->
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.6.7</version>
+				<configuration>
+					<targetClasses>
+						<param>com.devsecops.*</param>
+					</targetClasses>
+					<targetTests>
+						<param>com.devsecops.*</param>
+					</targetTests>
+				</configuration>
+				<executions>
+					<execution>
+						<id>pit-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>mutationCoverage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
