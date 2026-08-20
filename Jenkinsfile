@@ -43,6 +43,11 @@ pipeline {
       stage('Vulnarability scan - Docker') {
             steps {
               withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
+                // Purge any stale/corrupted local NVD cache DB (e.g. left over from an
+                // interrupted run or a prior plugin version's incompatible schema) before
+                // scanning, so a bad cache can never block the build.
+                sh "rm -rf ~/.m2/repository/org/owasp/dependency-check-data || true"
+                sh "find ~ -maxdepth 6 -iname 'odc.mv.db' -exec rm -f {} + || true"
                 sh "mvn org.owasp:dependency-check-maven:check"
               }
             }
