@@ -48,6 +48,8 @@ pipeline {
                 // scanning, so a bad cache can never block the build.
                 sh "rm -rf ~/.m2/repository/org/owasp/dependency-check-data || true"
                 sh "find ~ -maxdepth 6 -iname 'odc.mv.db' -exec rm -f {} + || true"
+                // TEMP DIAGNOSTIC: prints only the character count, never the secret itself.
+                sh 'echo "NVD_API_KEY length: ${#NVD_API_KEY}"'
                 sh "mvn org.owasp:dependency-check-maven:check"
               }
             }
