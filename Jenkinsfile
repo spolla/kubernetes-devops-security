@@ -42,7 +42,7 @@ pipeline {
         } 
       stage('Vulnarability scan - Docker') {
             steps {
-              sh "mvn dependency-check:check"
+              sh "mvn org.owasp:dependency-check-maven:check"
             }
             post {
               always {

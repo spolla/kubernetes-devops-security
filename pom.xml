@@ -102,6 +102,23 @@
 				</executions>
 			</plugin>
 
+			<!-- OWASP Dependency-Check: scans dependencies against the NVD for
+			     known CVEs. Report at target/dependency-check-report.html. -->
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>8.4.3</version>
+				<executions>
+					<execution>
+						<id>dependency-check</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
