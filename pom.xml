@@ -111,15 +111,10 @@
 				<configuration>
 					<nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
 				</configuration>
-				<executions>
-					<execution>
-						<id>dependency-check</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
+				<!-- No lifecycle-phase binding on purpose: this goal is invoked explicitly
+				     via `mvn org.owasp:dependency-check-maven:check` in its own Jenkins
+				     stage. A `verify`-phase binding here would also fire during the
+				     SonarQ stage's `mvn clean verify`, before NVD_API_KEY is in scope. -->
 			</plugin>
 
 		</plugins>
