@@ -40,6 +40,16 @@ pipeline {
               }
             }
         } 
+      stage('Vulnarability scan - Docker') {
+            steps {
+              sh "mvn dependency-check:check"
+            }
+            post {
+              always {
+                dependencyCheckPublisher pattern: 'target/dependency-check-report.html'
+              }
+            }
+        }
       stage('Docker Build and Push') {
             steps {
               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
